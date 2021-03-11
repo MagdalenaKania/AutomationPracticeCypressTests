@@ -1,0 +1,18 @@
+{
+  "name": "cypressproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "cypress": "^6.6.0"
+  },
+  "devDependencies": {
+    "mocha": "^8.3.0"
+  },
+  "scripts": {
+    "cy:open": "./node_modules/.bin/cypress open",
+    "cy:test": "./node_modules/.bin/cypress test"
+  },
+  "author": "",
+  "license": "ISC"
+}

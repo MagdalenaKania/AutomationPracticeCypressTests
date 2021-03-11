@@ -1,0 +1,11 @@
+{
+"baseUrl": "http://automationpractice.com/",
+"responseTimeOut": 90000,
+"pageLoadTimeOut": 600000,
+"experimentalSourceRewriting": true,
+"env": { "userData": {
+    "login": "testuser@example.com",
+    "password": "Password1234"
+}
+}
+}
