@@ -1,38 +1,33 @@
-import HomePage from "../pages/HomePage";
-import SignInPage from "../pages/SignInPage";
-import MyAccountPage from "../pages/MyAccountPage";
-import EveningDressesPage from "../pages/EveningDressesPage";
-import ProductPage from "../pages/ProductPage";
-import { describe, it } from "mocha";
+const { clickOnEveningDressesLink } = require("../../support/pages/HomePage");
+const { clickOnMoreButton } = require("../../support/pages/EveningDressesPage");
+const {
+  openingWriteAReviewWindow,
+  inputTitle,
+  inputComment,
+  clickOnSendButton,
+} = require("../../support/pages/ProductPage");
+const userData = Cypress.env("userData");
 
 describe("Item review tests", function () {
-  const homePage = new HomePage();
-  const signInPage = new SignInPage();
-  const myAccountPage = new MyAccountPage();
-  const eveningDressesPage = new EveningDressesPage();
-  const productPage = new ProductPage();
   beforeEach(function () {
     cy.visit("/");
   });
-  Cypress.on("uncaught:exception", (err, runnable) => {
-    return false;
+  before(function () {
+    cy.visit("/");
+    cy.login(userData.login, userData.password);
+    Cypress.on("uncaught:exception", (err, runnable) => {
+      return false;
+    });
   });
   it("Should add item review", function () {
-    homePage.clickOnSignInButton();
-    signInPage.inputEmailToLogin("testuser@example.com");
-    signInPage.inputPasswordToLogin("Password1234");
-    signInPage.clickOnSignInButton();
-    myAccountPage.clickOnHomeButton();
-    cy.contains("Popular");
-    homePage.clickOnEveningDressesLink();
+    clickOnEveningDressesLink();
     cy.contains("More");
-    eveningDressesPage.clickOnMoreButton();
-
+    clickOnMoreButton();
     cy.contains("Write a review");
-    productPage.openingWriteAReviewWindow();
-    productPage.inputTitle("Title");
-    productPage.inputComment("Comment");
-    productPage.clickOnSendButton();
+    openingWriteAReviewWindow();
+    inputTitle("Title");
+    inputComment("Comment");
+    clickOnSendButton();
     cy.contains("Popular");
   });
 });
